@@ -1,24 +1,29 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
 #include <iostream>
 #include <ctime>
 #include <random> 
 
 using namespace std;
 
-void fillArr(int ran[], int n){
+void fillArr(int *ran, int n){
     mt19937 mt(time(nullptr));
     for(int i=0; i<n; i++){
         ran[i]=mt();
     }
 }
 
-void retArr(int ran[], int n){
-    for(int i=0; i<n; i++){
-        std::cout<<ran[i]<<" ";
-    }
-    std::cout<<std::endl;
+int *retArr(int *ran, int n){
+    return ran;
 }
 
-unsigned long long insertionSort(int arr[], int n)
+unsigned long long insertionSort(int *arr, int n)
 {
     int i, key, j;
     unsigned long long b=0;
@@ -44,7 +49,7 @@ unsigned long long insertionSort(int arr[], int n)
  
 
 
-int partition(int vec[], int n, int low, int high, int  option, unsigned long long &count) {
+int partition(int *vec, int n, int low, int high, int  option, unsigned long long &count) {
 
     // Selecting last element as the pivot
     int pivot{0};
@@ -83,7 +88,7 @@ int partition(int vec[], int n, int low, int high, int  option, unsigned long lo
     return (i + 1);
 }
 
-void quickSort(int vec[], int n, int low, int high, int option, unsigned long long &count) {
+void quickSort(int *vec, int n, int low, int high, int option, unsigned long long &count) {
 
     // Base case: This part will be executed till the starting
     // index low is lesser than the ending index high
@@ -106,7 +111,7 @@ int main()
 {
 
     int n=10000;
-    int ran[10000];
+    int* ran =new int [n] ;
     mt19937 mt(time(nullptr));
     fillArr(ran, n);
     
@@ -114,8 +119,6 @@ int main()
     quickSort(ran, n, 0, n, 0, count1);
     std::cout<<count1<<std::endl;
     
-    int ran2[10000];
-    fillArr(ran, n);
     unsigned long long count2=insertionSort(ran, n);
     std::cout<<count2<<std::endl;
     
@@ -124,6 +127,7 @@ int main()
     std::cout<<mt()<<std::endl;
     std::cout<<mt();
 
-
+delete [] ran;
+delete [] ran2;
     return 0;
 }
